@@ -1,3 +1,5 @@
+package practice.BOJ;
+
 import java.io.*;
 import java.util.*;
 
