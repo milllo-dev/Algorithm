@@ -1,67 +1,65 @@
-import java.io.*;
-import java.util.*;
+class Solution {
+    public void solveSudoku(char[][] board) {
+        char[][] copy = new char[board.length][];
 
-public class SudokuSolver_37 {
-    public static void main(String[] args) throws IOException {
+        for(int i = 0; i < board.length; i++) {
+            copy[i] = board[i].clone();
+        }
 
+        backTracking(copy, 0);
+
+        for(int i = 0; i < board.length; i++) {
+            board[i] = copy[i].clone();
+        }
     }
 
-    public static void solveSudoku(char[][] board) {
-        // 1. 행 내 숫자는 중복되지 않게 1 ~ 9 까지의 수를 담는다
-        // 2. 열 내 숫자는 중복되지 않게 1 ~ 9 까지의 수를 담는다
-        // 3. 3x3 격자 내 숫자는 중복되지 않게 1 ~ 9 까지의 수를 담는다
-        // fin. 위 모든 제약 조건을 만족하면서 중복되지 않아야 한다
-    }
-
-    public static boolean backtracking(char[][] board, int n) throws IOException {
-        // base case
-        // 9x9 총 81칸의 수를 확인한다
-        if (n == 81) {
+    private boolean backTracking(char[][] board, int n) {
+        // 81개 격자 모두 확인
+        if(n == 81) {
             return true;
         }
 
-        // 0x0 부터 8x9까지 차례로 확인
-        int row = n / 9, col = n % 9;
+        int row = n / 9;
+        int col = n % 9;
 
-        // 해당 격자가 빈 값이 아닌 경우 다음 격차를 탐색한다 (재귀함수 호출)
-        if (board[row][col] != '.')
-            return backtracking(board, n + 1);
-        else {
-            // 빈 값인 경우 1 ~ 9까지의
-            for (int i = 0; i < 9; i++) {
-                char nextValue = (char) (49 + i);
-                if (!isFilled(board, row, col, nextValue))
-                    continue;
+        // 격자가 빈 공간인 경우 다음 격자 확인
+        if(board[row][col] != '.') {
+            return backTracking(board, n + 1);
+        } else {
+            for(int i = 0; i < 9; i++) {
+                char nextValue = (char)(49 + i);
+
+                // 현재 위치에 선택한 수가 유효한지 체크
+                if(!isValid(board, row, col, nextValue)) continue;
+
                 board[row][col] = nextValue;
-                if (backtracking(board, n + 1))
-                    return true;
+
+                if(backTracking(board, n + 1)) return true;
+
+                // 값이 해당 위치에 맞지 않는다면 다시 빈 칸으로 변경
                 board[row][col] = '.';
             }
         }
+
         return false;
     }
 
-    private static boolean isFilled(char[][] board, int row, int col, char value) {
-        // 열(column)을 순회하며 유효성 검사
-        for (int i = 0; i < 9; i++) {
-            if (board[i][col] == value)
-                return false;
+    private boolean isValid(char[][] board, int row, int col, char value) {
+        // row check
+        for(int i = 0; i < 9; i++) {
+            if(board[i][col] == value) return false;
         }
 
-        // 행(row)을 순회하며 유효성 검사
-        for (int i = 0; i < 9; i++) {
-            if (board[row][i] == value)
-                return false;
+        for(int i = 0; i < 9; i++) {
+            if(board[row][i] == value) return false;
         }
 
         int subRow = (row / 3) * 3;
         int subCol = (col / 3) * 3;
 
-        // 3x3 격자 내 유효성 검사
-        for (int dr = 0; dr < 3; dr++) {
-            for (int dc = 0; dc < 3; dc++) {
-                if (board[subRow + dr][subCol + dc] == value)
-                    return false;
+        for(int dr = 0; dr < 3; dr++) {
+            for(int dc = 0; dc < 3; dc++) {
+                if(board[subRow + dr][subCol + dc] == value) return false;
             }
         }
 
