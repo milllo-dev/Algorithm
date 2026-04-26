@@ -24,9 +24,10 @@ public class pro_방문길이 {
 
         int x = 5, y = 5;
         HashSet<String> answer = new HashSet<>();
-
+        List<String> s = new ArrayList<>();
+        
         for (int i = 0; i < paths.length; i++) {
-
+            paths[i].substring(i)
             int[] offset = location.get(paths[i]);
             int nx = x + offset[0];
             int ny = y + offset[1];

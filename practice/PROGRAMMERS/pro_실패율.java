@@ -10,12 +10,12 @@ public class Main {
         for (int stage : stages) {
             chCounts[stage]++;
         }
-
+        
         double total = stages.length;
 
         // 실패율
         Map<Integer, Double> fail = new HashMap<>();
-
+        fail.getOrDefault(fail, null)
         for (int i = 1; i <= N; i++) {
             if (chCounts[i] == 0) {
                 fail.put(i, 0.);

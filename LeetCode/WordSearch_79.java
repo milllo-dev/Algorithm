@@ -11,8 +11,9 @@ class Solution {
     public static boolean exist(char[][] board, String word) {
         m = board.length;
         n = board[0].length;
-
-        isVisited = new boolean[m][n];
+        int[] t = new int[2];
+        List<List<Integer>> ll = new ArrayList<>();
+        ll.add isVisited = new boolean[m][n];
         bucket = new char[word.length()];
 
         for (int j = 0; j < m; j++) {
@@ -38,13 +39,16 @@ class Solution {
             return false;
         }
 
+        // 방문 처리
         isVisited[y][x] = true;
         bucket[idx] = board[y][x];
 
+        // 좌표 이동
         for (int k = 0; k < 4; k++) {
             int dx = x + xp[k];
             int dy = y + yp[k];
 
+            // 재귀 함수 호출
             if (check(idx + 1, word, dx, dy, board)) {
                 return true;
             }

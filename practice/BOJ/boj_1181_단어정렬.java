@@ -16,7 +16,12 @@ public class Main {
             words[i] = st.nextToken();
         }
 
-        String[] secondSorted = Arrays.stream(words)
+        // 람다식 활용한 길이비교
+        String[] firstSorted = Arrays.stream(words).sorted((o1, o2) -> Integer.compare(o1.length(), o2.length()))
+                .toArray(String[]::new);
+
+        // Comparator를 활용한 길이 및
+        String[] secondSorted = Arrays.stream(firstSorted)
                 .sorted(Comparator.comparingInt(String::length).thenComparing(s -> s)).toArray(String[]::new);
 
         String[] dupCheck = Arrays.stream(secondSorted).distinct().toArray(String[]::new);

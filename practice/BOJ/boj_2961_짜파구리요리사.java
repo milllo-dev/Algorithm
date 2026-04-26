@@ -36,6 +36,7 @@ public class Main {
                 }
             }
 
+            // 공집합 제외
             if (bitters == 0)
                 return;
 
