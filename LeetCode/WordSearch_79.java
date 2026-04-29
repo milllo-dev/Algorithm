@@ -11,9 +11,8 @@ class Solution {
     public static boolean exist(char[][] board, String word) {
         m = board.length;
         n = board[0].length;
-        int[] t = new int[2];
-        List<List<Integer>> ll = new ArrayList<>();
-        ll.add isVisited = new boolean[m][n];
+
+        isVisited = new boolean[m][n];
         bucket = new char[word.length()];
 
         for (int j = 0; j < m; j++) {
