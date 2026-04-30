@@ -3,8 +3,37 @@ import java.util.*;
 
 // BFS
 public class KeysAndRooms_841_BFS {
-    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+    static boolean[] isVisited;
 
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        isVisited = new boolean[rooms.size()];
+
+        bfs(rooms, 0);
+
+        for (boolean check : isVisited) {
+            if (!check)
+                return false;
+        }
+
+        return true;
+    }
+
+    private void bfs(List<List<Integer>> rooms, int vertex) {
+        Deque<Integer> queue = new ArrayDeque<>();
+
+        queue.offer(vertex);
+        isVisited[vertex] = true;
+
+        while (!queue.isEmpty()) {
+            int currVertex = queue.poll();
+
+            for (int nextVertex : rooms.get(currVertex)) {
+                if (!isVisited[nextVertex]) {
+                    queue.offer(nextVertex);
+                    isVisited[nextVertex] = true;
+                }
+            }
+        }
     }
 }
 
