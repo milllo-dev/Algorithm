@@ -8,6 +8,13 @@ class Solution {
             arr[i][0] = nums[i];
             arr[i][1] = i;
         }
+        "".char
+        List<Integer> li = new ArrayList<>();
+        li.isEmpty()
+        li.remove
+        li.siz
+        Map<Character, Character> map = new HashMap<>();
+        map.put(null, null)
 
         Arrays.sort(arr, (o1, o2) -> {
             // 음수 : o1이 앞으로 감 (오름차순)
